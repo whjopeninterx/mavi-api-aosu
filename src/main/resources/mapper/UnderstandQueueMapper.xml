@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.openinterx.mavi.dao.UnderstandQueueMapper">
+  <resultMap id="BaseResultMap" type="com.openinterx.mavi.model.UnderstandQueue">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="callback_url" jdbcType="VARCHAR" property="callbackUrl" />
+    <result column="payload" jdbcType="VARCHAR" property="payload" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="processing" jdbcType="BOOLEAN" property="processing" />
+    <result column="retry_count" jdbcType="INTEGER" property="retryCount" />
+    <result column="max_retry" jdbcType="INTEGER" property="maxRetry" />
+    <result column="last_error" jdbcType="VARCHAR" property="lastError" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, param, callback_url, payload, "status", processing, retry_count, max_retry, last_error, 
+    updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from task_queue
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from task_queue
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.openinterx.mavi.model.UnderstandQueue">
+    <!--@mbg.generated-->
+    insert into task_queue (id, param, callback_url, 
+      payload, "status", processing, 
+      retry_count, max_retry, last_error, 
+      updated_at)
+    values (#{id,jdbcType=INTEGER}, #{param,jdbcType=VARCHAR}, #{callbackUrl,jdbcType=VARCHAR}, 
+      #{payload,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{processing,jdbcType=BOOLEAN}, 
+      #{retryCount,jdbcType=INTEGER}, #{maxRetry,jdbcType=INTEGER}, #{lastError,jdbcType=VARCHAR}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.openinterx.mavi.model.UnderstandQueue">
+    <!--@mbg.generated-->
+    insert into task_queue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="param != null">
+        param,
+      </if>
+      <if test="callbackUrl != null">
+        callback_url,
+      </if>
+      <if test="payload != null">
+        payload,
+      </if>
+      <if test="status != null">
+        "status",
+      </if>
+      <if test="processing != null">
+        processing,
+      </if>
+      <if test="retryCount != null">
+        retry_count,
+      </if>
+      <if test="maxRetry != null">
+        max_retry,
+      </if>
+      <if test="lastError != null">
+        last_error,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackUrl != null">
+        #{callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payload != null">
+        #{payload,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="processing != null">
+        #{processing,jdbcType=BOOLEAN},
+      </if>
+      <if test="retryCount != null">
+        #{retryCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxRetry != null">
+        #{maxRetry,jdbcType=INTEGER},
+      </if>
+      <if test="lastError != null">
+        #{lastError,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.openinterx.mavi.model.UnderstandQueue">
+    <!--@mbg.generated-->
+    update task_queue
+    <set>
+      <if test="param != null">
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackUrl != null">
+        callback_url = #{callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payload != null">
+        payload = #{payload,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        "status" = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="processing != null">
+        processing = #{processing,jdbcType=BOOLEAN},
+      </if>
+      <if test="retryCount != null">
+        retry_count = #{retryCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxRetry != null">
+        max_retry = #{maxRetry,jdbcType=INTEGER},
+      </if>
+      <if test="lastError != null">
+        last_error = #{lastError,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.openinterx.mavi.model.UnderstandQueue">
+    <!--@mbg.generated-->
+    update task_queue
+    set param = #{param,jdbcType=VARCHAR},
+      callback_url = #{callbackUrl,jdbcType=VARCHAR},
+      payload = #{payload,jdbcType=VARCHAR},
+      "status" = #{status,jdbcType=VARCHAR},
+      processing = #{processing,jdbcType=BOOLEAN},
+      retry_count = #{retryCount,jdbcType=INTEGER},
+      max_retry = #{maxRetry,jdbcType=INTEGER},
+      last_error = #{lastError,jdbcType=VARCHAR},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
