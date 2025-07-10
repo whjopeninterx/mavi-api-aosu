@@ -1,9 +1,7 @@
-package com.openInterX.common.advice;
+package com.openinterx.mavi.advice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.openInterX.common.exception.XvuException;
-import com.openInterX.common.pojo.response.ResultResponse;
+import com.openinterx.mavi.pojo.common.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -19,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @description 返回统一处理
  * @createtime: 20240905
  */
-@RestControllerAdvice(basePackages = {"com.openInterX.auth.controller","com.openInterX.serve.controller","com.openInterX.admin.controller","com.openInterX.api.controller"})
+@RestControllerAdvice
 @Slf4j
 @RequiredArgsConstructor
 public class ResponseHandlerAdvice implements ResponseBodyAdvice<Object> {
@@ -39,9 +37,9 @@ public class ResponseHandlerAdvice implements ResponseBodyAdvice<Object> {
         if (!MediaType.APPLICATION_JSON.equalsTypeAndSubtype(mediaType)) {
             return body; // 非 JSON 响应直接返回
         }
-        if (body instanceof ResultResponse) {
+        if (body instanceof Result<?>) {
             return body;
         }
-        return ResultResponse.success(body);
+        return Result.success(body);
     }
 }

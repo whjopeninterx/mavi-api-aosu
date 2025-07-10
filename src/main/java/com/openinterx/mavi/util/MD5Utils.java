@@ -1,11 +1,10 @@
-package com.openInterX.common.util;
-
-import com.openInterX.common.exception.XvuException;
+package com.openinterx.mavi.util;
+import com.openinterx.mavi.exception.XvuException;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+
 @Slf4j
 public class MD5Utils {
 

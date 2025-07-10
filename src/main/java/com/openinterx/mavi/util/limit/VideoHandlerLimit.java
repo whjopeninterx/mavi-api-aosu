@@ -1,6 +1,8 @@
-package com.openinterx.mavi.util;
+package com.openinterx.mavi.util.limit;
 
 import com.openinterx.mavi.pojo.config.VideoHandlerLimitConfig;
+import com.openinterx.mavi.util.ApplicationContextUtil;
+import com.openinterx.mavi.util.MD5Utils;
 import org.redisson.api.*;
 
 import java.util.concurrent.TimeUnit;
@@ -8,15 +10,15 @@ import java.util.concurrent.TimeUnit;
 public class VideoHandlerLimit {
 
 
-    private static  int MINUTE_RATE_LIMIT ; // 每分钟最多 10 次提交
+    private static  int SECONDS_RATE_LIMIT ; // 秒级别
     private static  int DAILY_RATE_LIMIT ; // 每天最多 1000 次提交
-    private static  long MINUTE_WINDOW ; // 时间窗口（分钟）
+    private static  long SECONDS_WINDOW ; // 时间窗口(秒)
     private static  long IDLE_TTL ; // 空闲过期时间（秒）
 
     public VideoHandlerLimit(VideoHandlerLimitConfig config) {
-        MINUTE_RATE_LIMIT=config.getMinuteRateLimit();
+        SECONDS_RATE_LIMIT=config.getSecondsRateLimit();
         DAILY_RATE_LIMIT=config.getDailyRateLimit();
-        MINUTE_WINDOW=config.getMinuteWindow();
+        SECONDS_WINDOW=config.getSecondsWindow();
         IDLE_TTL=config.getIdleTtl();
     }
 
@@ -35,7 +37,7 @@ public class VideoHandlerLimit {
 
         // 配置每分钟的令牌桶，如果不存在则初始化
         if (!minuteRateLimiter.isExists()) {
-            minuteRateLimiter.trySetRate(RateType.OVERALL, MINUTE_RATE_LIMIT, MINUTE_WINDOW, RateIntervalUnit.MINUTES);
+            minuteRateLimiter.trySetRate(RateType.OVERALL, SECONDS_RATE_LIMIT, SECONDS_WINDOW, RateIntervalUnit.SECONDS);
         }
 
         // 尝试获取每分钟的令牌

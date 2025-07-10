@@ -7,16 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
-@TableName("task_queue")
-public class TaskQueue {
+@TableName("understand_queue")
+public class UnderstandQueue {
     @TableId(type = IdType.AUTO)
     private Integer id;
     @TableField("task_id")
-    private Long taskId;
+    private String taskId;
     @TableField("param")
     private String param;
     @TableField("callback_url")
@@ -29,7 +27,6 @@ public class TaskQueue {
     private String status;
     @TableField("processing")
     private Boolean processing;
-
     @TableField("retry_count")
     private Integer retryCount;
     @TableField("max_retry")

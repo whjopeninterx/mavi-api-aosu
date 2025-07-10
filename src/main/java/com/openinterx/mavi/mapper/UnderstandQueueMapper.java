@@ -1,20 +1,22 @@
-package com.openinterx.mavi.dao;
+package com.openinterx.mavi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.openinterx.mavi.model.UnderstandQueue;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-@Mapper
+
 public interface UnderstandQueueMapper extends BaseMapper<UnderstandQueue> {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(UnderstandQueue record);
 
     int insertSelective(UnderstandQueue record);
 
-    UnderstandQueue selectByPrimaryKey(Integer id);
+    int updateStatus(@Param("status") String status, @Param("taskId") String taskId,@Param("processing") Boolean processing,@Param("oldProcessing") Boolean oldProcessing);
 
-    int updateByPrimaryKeySelective(UnderstandQueue record);
+    int updateResult(@Param("taskId") String taskId,
+                      @Param("status") String status,
+                      @Param("processing") Boolean processing,
+                      @Param("oldProcessing") Boolean oldProcessing,
+                      @Param("payload") String payload,
+                      @Param("lastError") String lastError);
 
-    int updateByPrimaryKey(UnderstandQueue record);
 }

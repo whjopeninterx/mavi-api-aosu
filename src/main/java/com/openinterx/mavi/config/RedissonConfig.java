@@ -1,7 +1,8 @@
-package com.openInterX.common.config;
+package com.openinterx.mavi.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +27,7 @@ public class RedissonConfig {
 
     @Bean
     public RedissonClient redissonClient() {
-        Config config = new Config();
-
+        final Config config = new Config();
         // 配置 Redis 单节点连接
         config.useSingleServer()
                 .setAddress(String.format("redis://%s:%d", redisHost, redisPort)) // Redis 地址
@@ -37,7 +37,7 @@ public class RedissonConfig {
                 .setConnectionPoolSize(64)  // 设置最大连接池大小
                 .setConnectionMinimumIdleSize(10);  // 设置最小空闲连接数;
                 // 超时时间
-        config.setCodec(new CustomFastJsonCodec());
+        config.setCodec(new JsonJacksonCodec());
         return Redisson.create(config);
     }
 }

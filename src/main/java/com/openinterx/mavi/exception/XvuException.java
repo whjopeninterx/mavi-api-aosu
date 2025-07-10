@@ -1,10 +1,5 @@
-package com.openInterX.common.exception;
+package com.openinterx.mavi.exception;
 
-/**
- * @author whj
- * @description mava 全局错误无法处理的问题使用这个异常建议后期发送短信通知
- * @createtime: 20240905
- */
 public class XvuException extends RuntimeException {
 
 

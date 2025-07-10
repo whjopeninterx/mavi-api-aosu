@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @RefreshScope
-public class NacosConfig {
+public class NacosBaseConfig {
 
     @Value("${understand.limit.config}")
     private String transcriptionLimitConfig;
 
-    @Value(("${gcs.config}"))
+    @Value("${gcs.config}")
     private String gcsConfig;
 
 }
